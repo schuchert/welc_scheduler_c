@@ -2,6 +2,10 @@
 #ifndef LINKED_LIST_H_
 #define LINKED_LIST_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stddef.h>
 
 typedef struct linked_list linked_list;
@@ -19,5 +23,9 @@ list_node *linked_list_last(linked_list *list);
 list_iterator *linked_list_begin(linked_list *list);
 int linked_list_has_next(list_iterator *iter);
 void *linked_list_next(list_iterator *iter);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

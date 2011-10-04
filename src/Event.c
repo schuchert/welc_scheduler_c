@@ -1,6 +1,7 @@
 #include "Event.h"
 
-#include <Stdlib.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 Event *event_create(Date *date, enum DayTime slot) {
 	Event *e = malloc(sizeof(Event));
@@ -10,9 +11,10 @@ Event *event_create(Date *date, enum DayTime slot) {
 }
 
 void event_remove(Event *event) {
-	free(event);
+	if(event != NULL)
+		free(event);
 }
 
 void event_added(Event *event) {
-	printf("Event at: %d added", event->date);
+	printf("Event at: %ld added", event->date.date_time);
 }

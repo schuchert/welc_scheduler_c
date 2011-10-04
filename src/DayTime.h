@@ -3,6 +3,10 @@
 #ifndef DAYTIME_H_
 #define DAYTIME_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 enum DayTime {
 	  Time8AM = 0,
 	  Time9AM,
@@ -20,5 +24,9 @@ enum DayTime {
 };
 
 const char* DayTime_to_string(enum DayTime);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
