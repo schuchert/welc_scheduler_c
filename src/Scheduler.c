@@ -1,11 +1,11 @@
 #include "scheduler.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include "Mail.h"
 #include "DayTime.h"
+#include "SchedulerMemory.h"
 
 Scheduler *Scheduler_create(void) {
-	Scheduler *s = malloc(sizeof(Scheduler));
+	Scheduler *s = acquire(sizeof(Scheduler));
 	s->event_list = linked_list_create();
 	return s;
 }
@@ -13,7 +13,7 @@ Scheduler *Scheduler_create(void) {
 void Scheduler_delete(Scheduler *scheduler) {
 	if (scheduler != NULL) {
 		linked_list_release_destroy(scheduler->event_list, (RELEASE_F) event_remove);
-		free(scheduler);
+		release(scheduler);
 	}
 }
 
@@ -23,7 +23,7 @@ void Scheduler_add_event(Scheduler *scheduler, Event *event) {
 	char buffer[128];
 	sprintf(
 			buffer,
-			"Event Notification: %ld - %s", event->date.date_time, DayTime_to_string(event->slot));
+			"...Event Notification: %ld - %s...", event->date.date_time, DayTime_to_string(event->slot));
 	send_mail("jacques@work.com", buffer);
 }
 
@@ -35,5 +35,6 @@ void Scheduler_all_events_on(Scheduler *scheduler, Date date,
 		if (current->date.date_time == date.date_time)
 			linked_list_add(found_events, current);
 	}
+	linked_list_end(iter);
 }
 

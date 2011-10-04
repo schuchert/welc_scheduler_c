@@ -50,6 +50,12 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.macosx.exe.debug.46280209" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.macosx.exe.debug">
 								<option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.macosx.exe.debug.option.optimization.level.394955755" name="Optimization Level" superClass="gnu.c.compiler.macosx.exe.debug.option.optimization.level" valueType="enumerated"/>
 								<option id="gnu.c.compiler.macosx.exe.debug.option.debugging.level.1942351759" name="Debug Level" superClass="gnu.c.compiler.macosx.exe.debug.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.include.paths.956450559" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="/Users/schuchert/src/CppUTest2_3/include"/>
+								</option>
+								<option id="gnu.c.compiler.option.preprocessor.def.symbols.18028523" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="CPPUTEST_USE_MEM_LEAK_DETECTION"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.462266370" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 						</toolChain>

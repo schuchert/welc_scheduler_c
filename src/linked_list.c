@@ -1,6 +1,7 @@
 #include "linked_list.h"
 #include <stdio.h>
-#include <stdlib.h>
+
+#include "SchedulerMemory.h"
 
 struct linked_list {
 	list_node *head;
@@ -17,22 +18,22 @@ struct list_iterator {
 };
 
 static void list_node_release_delete(list_node *node, RELEASE_F f) {
-	if(NULL != f)
+	if (NULL != f)
 		f(node->data);
 	node->data = 0;
 	node->next = 0;
-	free(node);
+	release(node);
 }
 
 static list_node *list_node_create(void *value) {
-	list_node *node = malloc(sizeof(list_node));
+	list_node *node = acquire(sizeof(list_node));
 	node->data = value;
 	node->next = NULL;
 	return node;
 }
 
 linked_list *linked_list_create(void) {
-	linked_list *l = malloc(sizeof(linked_list));
+	linked_list *l = acquire(sizeof(linked_list));
 	l->head = list_node_create(NULL);
 	return l;
 }
@@ -42,21 +43,23 @@ void linked_list_destroy(linked_list *aList) {
 }
 
 void linked_list_release_destroy(linked_list *aList, RELEASE_F f) {
-	if(aList != NULL) {
+	if (aList != NULL) {
 		list_node *current = aList->head;
-		while(NULL != current->next) {
-			list_node *next = current->next;
+		list_node *next = NULL;
+		do {
+			next = current->next;
 			list_node_release_delete(current, f);
 			current = next;
-		}
-		free(aList);
+		} while(NULL != next);
+
+		release(aList);
 	}
 }
 
 size_t linked_list_size(linked_list *list) {
 	size_t size = 0;
 	list_node *current = list->head;
-	while(NULL != current->next) {
+	while (NULL != current->next) {
 		++size;
 		current = current->next;
 	}
@@ -65,7 +68,7 @@ size_t linked_list_size(linked_list *list) {
 
 list_node *linked_list_last(linked_list *list) {
 	list_node *current = list->head;
-	while(NULL != current->next)
+	while (NULL != current->next)
 		current = current->next;
 	return current;
 }
@@ -76,7 +79,7 @@ void linked_list_add(linked_list *list, void *value) {
 }
 
 list_iterator *linked_list_begin(linked_list *list) {
-	list_iterator *iter = malloc(sizeof(list_iterator));
+	list_iterator *iter = acquire(sizeof(list_iterator));
 	iter->list = list;
 	iter->current = list->head;
 	return iter;
@@ -90,4 +93,12 @@ void *linked_list_next(list_iterator *iter) {
 	iter->current = iter->current->next;
 	void *value = iter->current->data;
 	return value;
+}
+
+void linked_list_end(list_iterator *iter) {
+	release(iter);
+}
+
+void *list_node_data(list_node *node) {
+	return node->data;
 }

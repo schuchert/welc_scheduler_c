@@ -1,10 +1,10 @@
 #include "Event.h"
 
-#include <stdlib.h>
+#include "SchedulerMemory.h"
 #include <stdio.h>
 
 Event *event_create(Date *date, enum DayTime slot) {
-	Event *e = malloc(sizeof(Event));
+	Event *e = acquire(sizeof(Event));
 	e->date = *date;
 	e->slot = slot;
 	return e;
@@ -12,9 +12,9 @@ Event *event_create(Date *date, enum DayTime slot) {
 
 void event_remove(Event *event) {
 	if(event != NULL)
-		free(event);
+		release(event);
 }
 
 void event_added(Event *event) {
-	printf("Event at: %ld added", event->date.date_time);
+	printf("\n...Event at: %ld added...", event->date.date_time);
 }

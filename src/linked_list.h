@@ -21,8 +21,10 @@ void linked_list_add(linked_list *list, void *value);
 list_node *linked_list_last(linked_list *list);
 
 list_iterator *linked_list_begin(linked_list *list);
+void linked_list_end(list_iterator *iter);
 int linked_list_has_next(list_iterator *iter);
 void *linked_list_next(list_iterator *iter);
+void *list_node_data(list_node *node);
 
 #ifdef __cplusplus
 }
