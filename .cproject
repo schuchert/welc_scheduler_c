@@ -57,6 +57,7 @@
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.18028523" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="CPPUTEST_USE_MEM_LEAK_DETECTION"/>
 								</option>
+								<option id="gnu.c.compiler.option.misc.other.268658847" superClass="gnu.c.compiler.option.misc.other" value="-c -fmessage-length=0 -fprofile-arcs -ftest-coverage" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.462266370" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 						</toolChain>
